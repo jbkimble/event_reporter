@@ -4,10 +4,26 @@ module Cleaner
   end
 
   def self.clean_name(name)
-    name.strip.split.map{|word| word.capitalize}.join(' ')
+    if name == nil
+      name = ""
+    else
+      name.strip.split.map{|word| word.capitalize}.join(' ')
+    end
   end
 
   def self.clean_phone_number(phonenumber)
-    phonenumber.delete(' ()-.E').rjust(10, "0")
+    if phonenumber == nil
+      phonenumber = ""
+    else
+      phonenumber.delete(' ()-.E').rjust(10, "0")
+    end
+  end
+
+  def self.clean_address(address)
+    if address == nil
+      address = ""
+    else
+      address.gsub!('#,/', ' ')
+    end
   end
 end
