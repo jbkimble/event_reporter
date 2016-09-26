@@ -83,7 +83,6 @@ class Que
     end
   end
 
-# saves to tab deliminated values
   def save_to_txt(file_name)
     tab_file_header = "Last_Name \t First_Name \t Email_Address \t Zipcode \t City \t State \t Home_Address \t Home_Phone \t District \n"
 
@@ -97,7 +96,6 @@ class Que
     end
   end
 
-# save to valid parsable json
   def save_to_json(file_name)
     json_prepped = @final_queue.map do |object|
       {"first name" => object.first_name, "last_name" => object.last_name,
@@ -111,7 +109,6 @@ class Que
     end
   end
 
-#generates valid parsable XML
   def save_to_xml(file_name)
     build_xml = Nokogiri::XML::Builder.new do |xml|
       xml.root {
@@ -138,7 +135,6 @@ class Que
     end
   end
 
-#generates valid Yaml
   def save_to_yaml(file_name)
     json_prepped = @final_queue.map do |object|
       {"first name" => object.first_name, "last_name" => object.last_name,
