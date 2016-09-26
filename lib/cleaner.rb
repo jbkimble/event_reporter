@@ -26,4 +26,12 @@ module Cleaner
       address.gsub!('#,/', ' ')
     end
   end
+
+  def self.clean_state(state=nil)
+    if state == nil
+      return ""
+    else
+      return state
+    end
+  end
 end

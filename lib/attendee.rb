@@ -12,16 +12,9 @@ class Attendee
     @email_address = row[:email_address]
     @home_phone = Cleaner.clean_phone_number(row[:homephone])
     @street = row[:street]
-#
     @city = Cleaner.clean_name(row[:city])
-
-    if row[:state] == nil
-      @state = ""
-    else
-      @state = row[:state]
-    end
-    
+    @state = Cleaner.clean_state(row[:state])
     @zipcode = Cleaner.clean_zipcode(row[:zipcode])
-    @district = ""
+    @district = nil
   end
 end

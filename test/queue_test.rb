@@ -14,7 +14,7 @@ class QueueTest < Minitest::Test
   def test_final_queue_can_be_shoveled_into
     q = Que.new
     row = {first_name: "Jon", last_name: "kimble", homephone: "0000000000", zipcode: "00000"}
-    att = Attendee.new(row)
+    att =  e.new(row)
     q << att
 
     assert_equal 1, q.final_queue.length
