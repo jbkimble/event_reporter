@@ -148,5 +148,71 @@ class EventReporterTest < Minitest::Test
     assert_equal 79, tr.queue.count
   end
 
-  def 
+  def test_can_add_multiple_additional_attribute_types
+    tr = EventReporter.new
+    tr.load_file
+
+    tr.finds_attribute_type("state", "WA")
+    assert_equal 50, tr.queue.count
+
+    tr.adds_attribute_type("state", "CO")
+    assert_equal 79, tr.queue.count
+
+    tr.adds_attribute_type("first_name", "Mary")
+    assert_equal 95, tr.queue.count
+
+    tr.adds_attribute_type("zipcode", "00000")
+    assert_equal 173, tr.queue.count
+  end
+
+  def test_can_subtract_attribute_types_from_queue
+    tr = EventReporter.new
+    tr.load_file
+
+    tr.finds_attribute_type("state", "WA")
+    assert_equal 50, tr.queue.count
+
+    tr.subtract_attribute_type("first_name", "Paige")
+    assert_equal 49, tr.queue.count
+  end
+
+  def test_can_subtract_multiple_attribute_types_from_queue
+    tr = EventReporter.new
+    tr.load_file
+
+    tr.finds_attribute_type("state", "WA")
+    assert_equal 50, tr.queue.count
+
+    tr.subtract_attribute_type("first_name", "Paige")
+    assert_equal 49, tr.queue.count
+
+    tr.subtract_attribute_type("last_name", "Davis")
+    assert_equal 48, tr.queue.count
+
+    tr.subtract_attribute_type("city", "Seattle")
+    assert_equal 24, tr.queue.count
+
+    tr.subtract_attribute_type("home_phone", "3609046000")
+    assert_equal 23, tr.queue.count
+
+    tr.subtract_attribute_type("street", "1604 18th Ave")
+    assert_equal 22, tr.queue.count
+
+    tr.subtract_attribute_type("zipcode", "99362")
+    assert_equal 7, tr.queue.count
+  end
+
+  def test_can_add_to_queue_and_still_ping_district
+    er = EventReporter.new
+    er.load_file
+
+    er.finds_attribute_type("first_name", "Frank")
+    assert_equal nil, er.queue.final_queue[0].district
+
+    er.adds_attribute_type("last_name", "Hazlett")
+    er.queue.queue_district
+
+    assert_equal "2", er.queue.final_queue[2].district
+
+  end
 end

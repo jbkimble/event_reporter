@@ -29,7 +29,7 @@ class EventReporter
     @all_attendees.each do |object|
       if criteria == object.send(attribute_type)
       @queue << object
-      end
+    end
     end
   end
 
