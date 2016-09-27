@@ -43,4 +43,24 @@ class AttendeeTest < Minitest::Test
     assert_equal nil, a.district
   end
 
+  def test_attendee_district_can_be_changed
+    er = EventReporter.new
+    a = Attendee.new({:first_name => "Erlane", :last_name => "Eliza", :email_address => "sec@gmail.com",
+      :homephone => "888-555-1000", :street => "123 cherry lane", :city => "Tampa Bay", :state => "FL", :zipcode => "98765", :district => ""})
+
+    assert_equal nil, a.district
+
+    a.district = "12"
+
+    assert_equal "12", a.district
+    end
+
+    def test_clean_data_makes_it_to_attendee_objects
+      er = EventReporter.new
+      er.load_file
+      er.finds_attribute_type("first_name", "Nolan")
+
+      assert_equal "6172257000", er.queue.final_queue[0].home_phone
+      assert_equal "02139", er.queue.final_queue[0].zipcode
+    end
 end

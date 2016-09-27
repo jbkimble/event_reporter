@@ -202,6 +202,21 @@ class EventReporterTest < Minitest::Test
     assert_equal 7, tr.queue.count
   end
 
+  def test_can_subtract_from_queue_which_has_been_added_to
+    er = EventReporter.new
+    er.load_file
+
+    er.finds_attribute_type("first_name", "Sarah")
+    assert_equal 78, er.queue.count
+
+    er.adds_attribute_type("last_name", "Hazlett")
+    assert_equal 80, er.queue.count
+
+    er.subtract_attribute_type("first_name", "Martha")
+    assert_equal 79, er.queue.count
+
+  end
+
   def test_can_add_to_queue_and_still_ping_district
     er = EventReporter.new
     er.load_file
@@ -213,6 +228,19 @@ class EventReporterTest < Minitest::Test
     er.queue.queue_district
 
     assert_equal "2", er.queue.final_queue[2].district
+  end
 
+
+  def test_can_reset_queue_which_has_been_added_to
+    er = EventReporter.new
+    er.load_file
+
+    er.finds_attribute_type("first_name", "Frank")
+    er.adds_attribute_type("last_name", "Hazlett")
+    er.subtract_attribute_type("first_name", "Martha")
+    assert_equal 2, er.queue.count
+
+    er.finds_attribute_type("first_name", "Frank")
+    assert_equal 1, er.queue.count
   end
 end

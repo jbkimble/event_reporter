@@ -4,6 +4,7 @@ require 'minitest/pride'
 
 class CleanerTest < Minitest::Test
   def test_can_clean_zipcode
+    
     assert_equal "00000", Cleaner.clean_zipcode(nil)
     assert_equal "00000", Cleaner.clean_zipcode("")
     assert_equal "28920", Cleaner.clean_zipcode("289208140123")
@@ -11,6 +12,7 @@ class CleanerTest < Minitest::Test
   end
 
   def test_can_clean_names
+
     assert_equal "", Cleaner.clean_name(nil)
     assert_equal "Mary", Cleaner.clean_name("mary")
     assert_equal "Marymultiplename", Cleaner.clean_name("mary" "multiple" "name")
@@ -19,6 +21,7 @@ class CleanerTest < Minitest::Test
   end
 
   def test_can_clean_phone_numbers
+
     assert_equal "", Cleaner.clean_phone_number(nil)
     assert_equal "0000888555", Cleaner.clean_phone_number("888 555")
     assert_equal "8885551111", Cleaner.clean_phone_number("888-555-1111")

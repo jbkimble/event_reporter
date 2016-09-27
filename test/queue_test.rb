@@ -123,11 +123,51 @@ class QueueTest < Minitest::Test
     er.queue.save_to_txt("testing_testing.txt")
   end
 
+  def test_final_queue_is_not_deconstructed_after_saving_to_txt
+    er = EventReporter.new
+    er.load_file
+    er.finds_attribute_type("first_name", "Meghan")
+
+    assert_equal 6, er.queue.count
+
+    er.queue.save_to_txt("testing_testing.txt")
+    assert_equal 6, er.queue.count
+  end
+
   def test_can_find_attributes_and_save_to_json
     er = EventReporter.new
     er.load_file
     er.finds_attribute_type("first_name", "Sarah")
     er.queue.save_to_json("testing_testing.json")
+  end
+
+  def test_final_queue_is_not_deconstructed_after_exporting_to_json
+    er = EventReporter.new
+    er.load_file
+    er.finds_attribute_type("first_name", "Rachel")
+
+    assert_equal 52, er.queue.count
+
+    er.queue.save_to_xml("testing_testing.json")
+    assert_equal 52, er.queue.count
+  end
+
+  def test_can_find_attributes_and_save_to_yaml
+    er = EventReporter.new
+    er.load_file
+    er.finds_attribute_type("first_name", "Sarah")
+    er.queue.save_to_yaml("testing_testing.yml")
+  end
+
+  def test_final_queue_is_not_deconstructed_after_save_yml
+    er = EventReporter.new
+    er.load_file
+    er.finds_attribute_type("first_name", "Ben")
+
+    assert_equal 23, er.queue.count
+
+    er.queue.save_to_xml("testing_testing.yml")
+    assert_equal 23, er.queue.count
   end
 
   def test_can_find_attributes_and_save_to_xml
@@ -137,11 +177,15 @@ class QueueTest < Minitest::Test
     er.queue.save_to_xml("testing_testing.xml")
   end
 
-  def test_can_find_attributes_and_save_to_yaml
+  def test_final_queue_is_not_deconstructed_after_saving_xml
     er = EventReporter.new
     er.load_file
     er.finds_attribute_type("first_name", "Sarah")
-    er.queue.save_to_yaml("testing_testing.yml")
+
+    assert_equal 78, er.queue.count
+
+    er.queue.save_to_xml("testing_testing.xml")
+    assert_equal 78, er.queue.count
   end
 
   def test_can_queue_district_after_clearing_queue
