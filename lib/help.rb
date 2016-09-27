@@ -6,7 +6,7 @@ class HelpDocumentation
           ||   find <attribute> <criteria>, queue count, queue clear,   ||
           ||   queue district, queue print, queue print by <attribute>, ||
           ||   queue save to <filename.csv>,                            ||
-          ||   queue export html <filename.html>, quit                     ||
+          ||   queue export html <filename.html>, quit                  ||
           ================================================================
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           "

@@ -30,10 +30,24 @@ until user_command[0] == "quit"
         er_ob.queue.print_sorted_by_attribute(user_command[3])
         end
     elsif user_command[1] == "save"
-        er_ob.queue.save_to_csv(user_command[3])
+        if user_command[3][-3..-1] == "csv"
+          er_ob.queue.save_to_csv(user_command[3])
+        elsif user_command[3][-3..-1] == "txt"
+          er_ob.queue.save_to_txt(user_command[3])
+        elsif user_command[3][-4..-1] == "json"
+          er_ob.queue.save_to_json(user_command[3])
+        elsif user_command[3][-3..-1] == "xml"
+          er_ob.queue.save_to_xml(user_command[3])
+        elsif user_command[3][-3..-1] == "yml"
+          er_ob.queue.save_to_yaml(user_command[3])
+        end
     elsif user_command[1] == "export"
       er_ob.queue.export_queue_to_html(user_command[3])
     end
+  when "add"
+    er_ob.adds_attribute_type(user_command[1], user_command[2..-1].join(" ").upcase.capitalize)
+  when "subtract"
+    er_ob.subtract_attribute_type(user_command[1], user_command[2..-1].join(" ").upcase.capitalize)
   when "find"
       er_ob.finds_attribute_type(user_command[1], user_command[2..-1].join(" "))
   when "quit"

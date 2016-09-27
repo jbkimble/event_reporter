@@ -1,3 +1,5 @@
+require 'pry'
+
 module Cleaner
   def self.clean_zipcode(zipcode)
     zipcode.to_s.rjust(5,"0")[0..4]
@@ -22,8 +24,14 @@ module Cleaner
   def self.clean_address(address)
     if address == nil
       address = ""
+    end
+  end
+
+  def self.clean_state(state=nil)
+    if state == nil
+      return ""
     else
-      address.gsub!('#,/', ' ')
+      return state
     end
   end
 end
